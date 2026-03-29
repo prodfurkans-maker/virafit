@@ -199,7 +199,7 @@ const AboutUs = () => {
   return (
     <section id="about" className="py-32 px-6 relative overflow-hidden scroll-mt-20">
       <div className="max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-20 items-center">
+        <div className="grid lg:grid-cols-2 gap-20 items-start">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -209,29 +209,95 @@ const AboutUs = () => {
             <h2 className="text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.9] mb-8 text-white">
               GELECEĞİN FİTNESS <br /> <span className="text-brand-pink">DENEYİMİ</span>
             </h2>
-            <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-              Virafit, geleneksel spor anlayışını modern teknolojiyle birleştiren, kadın odaklı bir fitness merkezidir. 
-            </p>
-            <p className="text-lg text-gray-400 mb-12 leading-relaxed">
-              Amacımız, yoğun hayat temposu içinde kendine vakit ayırmakta zorlanan kadınlara, en kısa sürede en etkili sonuçları sunmaktır. EMS, Biorezonans ve Klinik Pilates disiplinlerini bir araya getirerek, sadece fiziksel değil, bütünsel bir iyilik hali hedefliyoruz.
-            </p>
+            
+            <div className="space-y-6 text-gray-300 leading-relaxed">
+              <p className="text-xl font-medium text-white">
+                VİRAFİT KURTKÖY YENIŞEHIR PENDİK İSTANBUL'da bulunan üyelerine, bireysel ihtiyaçlarını karşılamak amacıyla kısa sürede sonuç veren; son teknoloji cihazlar ile destek ve diyetisyen takipli beslenme programları sunmaktadır.
+              </p>
+              <p>
+                Kişisel antrenörlerimiz ve beslenme uzmanlarımızdan oluşan ekibimiz, sağlık ve fitness hedeflerinize ulaşmanız için size özel bir program oluşturmak üzere sizinle birlikte çalışacak; tüm bunları isterseniz kendi evinizin, ofisinizin rahatlığında veya özel butik stüdyomuzda gerçekleştirebilirsiniz. Sizi motive edeceğiz ve en iyi halinize ulaşmanıza yardımcı olmak için yanınızda olacağız.
+              </p>
+              
+              <div className="pt-8 border-t border-white/10">
+                <h3 className="text-2xl font-black text-brand-neon uppercase mb-4">Misyonumuz</h3>
+                <p>
+                  Misyonumuz, herkese sağlık ve fitness hedeflerine ulaşma fırsatı sunmaktır. Kendinizin en iyi halinizi yaşamanız için gereken desteği vermek için yanınızda olmak amacındayız.
+                </p>
+              </div>
+
+              <div className="pt-8">
+                <p className="text-lg italic text-brand-pink font-bold">
+                  Geleneksel spor salonlarına veda edin ve fitness devriminize hazır olun!
+                </p>
+                <p className="mt-4">
+                  Virafit Sinem Karaca'da FDA onaylı denenmiş sonuçları kanıtlanmış cihazlar ve beslenme programı sizi bekliyor. Her zaman yanınızda olan eğitmenlerimizle eğlenirken kilo verin; ister açık havada, ister sadece sizin için özel bir EMS antrenmanında olun.
+                </p>
+              </div>
+            </div>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative"
+            className="space-y-8"
           >
-            <div className="aspect-[4/5] rounded-[4rem] overflow-hidden border border-white/10">
-              <img 
-                src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=2070&auto=format&fit=crop" 
-                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000"
-                alt="About Virafit"
-                referrerPolicy="no-referrer"
-              />
-            </div>
+            <Card className="bg-white/[0.02] border-brand-neon/20">
+              <h3 className="text-xl font-black text-brand-neon uppercase mb-6">Virafit Zayıflama</h3>
+              <ul className="space-y-4 text-gray-300">
+                <li className="flex items-center gap-3"><Zap size={16} className="text-brand-neon" /> Kas kütlesi oluşturun ve yağ yakın.</li>
+                <li className="flex items-center gap-3"><Zap size={16} className="text-brand-neon" /> Metabolizmayı hızlandırın.</li>
+                <li className="flex items-center gap-3"><Zap size={16} className="text-brand-neon" /> Seans başına sadece 25 dakika.</li>
+                <li className="flex items-center gap-3"><Zap size={16} className="text-brand-neon" /> Zaman kazanın.</li>
+              </ul>
+            </Card>
+
+            <Card className="bg-white/[0.02] border-brand-pink/20">
+              <h3 className="text-xl font-black text-brand-pink uppercase mb-6">EMS ve Geleneksel Yöntemlerin Kombinasyonu</h3>
+              <ul className="space-y-4 text-gray-300">
+                <li className="flex items-center gap-3"><Activity size={16} className="text-brand-pink" /> Hızlı kardiyovasküler fitness.</li>
+                <li className="flex items-center gap-3"><Activity size={16} className="text-brand-pink" /> Hızlandırılmış kilo kaybı.</li>
+                <li className="flex items-center gap-3"><Activity size={16} className="text-brand-pink" /> Sık eğitim seansları.</li>
+                <li className="flex items-center gap-3"><Activity size={16} className="text-brand-pink" /> Hızlı ve etkili sonuçlar.</li>
+              </ul>
+            </Card>
           </motion.div>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-8 mt-20">
+          <Card className="bg-brand-surface/50">
+            <h4 className="text-lg font-black text-white uppercase mb-4">Ekibimiz Size Destek Olurken:</h4>
+            <ul className="space-y-3 text-sm text-gray-400">
+              <li>• Danışmanlık görüşmesi gerçekleştirme</li>
+              <li>• Haftalık kilo verme programı</li>
+              <li>• Stüdyoda veya evinizde seanslar</li>
+              <li>• Egzersiz ve beslenme programı oluşturma</li>
+            </ul>
+          </Card>
+          
+          <Card className="bg-brand-surface/50">
+            <h4 className="text-lg font-black text-white uppercase mb-4">Sporcular İçin:</h4>
+            <ul className="space-y-3 text-sm text-gray-400">
+              <li>• Özelleştirilmiş çapraz eğitim</li>
+              <li>• Hız ve güç geliştirme</li>
+              <li>• Daha fazla dayanıklılık</li>
+              <li>• Kişiye özel spor beslenmesi</li>
+            </ul>
+            <p className="mt-4 text-xs font-bold text-brand-neon uppercase">İlk eğitim seansınız bizden!</p>
+          </Card>
+
+          <Card className="bg-brand-surface/50">
+            <h4 className="text-lg font-black text-white uppercase mb-4">EMS Eğitim Programı:</h4>
+            <p className="text-sm text-gray-400 leading-relaxed">
+              Sadece 25 dakikalık EMS antrenmanı ile kişiye özel, tüm vücudu çalıştıran bir güç ve fitness çözümü sunuyoruz. Haftada sadece iki (2) seans, spor salonunda 4-5 saatlik antrenmanla aynı sonuçları verir.
+            </p>
+          </Card>
+        </div>
+
+        <div className="mt-20 p-12 rounded-[3rem] bg-gradient-to-r from-brand-neon/10 to-brand-pink/10 border border-white/10">
+          <p className="text-gray-300 leading-relaxed italic">
+            "VİRAFİT KİŞİSEL ANTRENÖRLERİMİZ, daha az zaman harcayarak daha hızlı sonuçlar veren yüksek yoğunluklu aralıklı bir antrenman sunacak. Elektrik uyarıları, eklem aşırı yüklenmelerini ve kas yaralanmalarını önleyerek kasları doğrudan uyarır. Bu uyarılar sadece yüzeysel değil, aynı zamanda derin kas dokusunu da uyararak sırt ağrıları gibi kas-iskelet sistemi ağrılarının hafifletilmesine yardımcı olur."
+          </p>
         </div>
       </div>
     </section>
@@ -321,7 +387,7 @@ const ContactSection = () => {
       {/* Map Section */}
       <div className="h-[400px] w-full bg-gray-900 overflow-hidden">
         <iframe 
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3008.963404456!2d29.0094!3d41.0763!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cab63f399e9571%3A0x2a3c2236a5d5624a!2sLevent%2C%20Be%C5%9Fikta%C5%9F%2F%C4%B0stanbul!5e0!3m2!1str!2str!4v1711620000000!5m2!1str!2str" 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3014.23456789!2d29.3087!3d40.9123!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cad0f123456789%3A0x1234567890abcdef!2zS3VydGvDtnksIFBlbmRpay_EsHN0YW5idWw!5e0!3m2!1str!2str!4v1711620000000!5m2!1str!2str" 
           width="100%" 
           height="100%" 
           style={{ border: 0, filter: 'grayscale(1) invert(1) contrast(1.2)' }} 
@@ -384,7 +450,7 @@ const EnhancedFooter = () => {
           <div className="space-y-4">
             <div className="flex items-center gap-3 text-gray-400">
               <MapPin size={18} className="text-brand-neon" />
-              <span>Levent & Bağdat Caddesi, İstanbul</span>
+              <span>Kurtköy Yenişehir, Pendik, İstanbul</span>
             </div>
             <div className="flex items-center gap-3 text-gray-400">
               <Phone size={18} className="text-brand-neon" />

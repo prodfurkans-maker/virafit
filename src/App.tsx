@@ -19,29 +19,73 @@ import {
 } from 'lucide-react';
 import { cn } from './lib/utils';
 
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
 // --- Components ---
 
 const PilatesSlider = () => {
   const slides = [
-    { img: "https://images.unsplash.com/photo-1518611012118-29a8d63ee0c2?q=80&w=2070&auto=format&fit=crop" },
-    { img: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=2070&auto=format&fit=crop" },
-    { img: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=1920&auto=format&fit=crop" }
+    { 
+      img: "https://lh3.googleusercontent.com/d/177BntrnlQTMMkpvpxIT6ScWxXIJhK8Jy=s2048",
+      title: "KLİNİK PİLATES",
+      subtitle: "Vücudunuzu esnetin, merkezinizi güçlendirin."
+    },
+    { 
+      img: "https://lh3.googleusercontent.com/d/1vRSIjLFmAWMrtmWZs7PMNnpkpfoHDARt=s2048",
+      title: "EMS VE TEKNOLOJİ",
+      subtitle: "Geleceğin antrenman sistemleri ile tanışın."
+    },
+    { 
+      img: "https://lh3.googleusercontent.com/d/1d2PCvv9nKZftS6jUWjEexMjknfqPjH9k=s2048",
+      title: "BİYOREZONANS",
+      subtitle: "Vücut frekanslarını dengeleyerek iştah kontrolü."
+    }
   ];
 
   return (
-    <div className="h-[50vh] md:h-[70vh] w-full relative">
+    <div className="h-[60vh] md:h-[80vh] w-full relative group select-none">
       <Swiper
+        key="pilates-slider"
         modules={[Navigation, Pagination, Autoplay]}
         navigation
         pagination={{ clickable: true }}
-        autoplay={{ delay: 5000 }}
+        autoplay={{ delay: 4000, disableOnInteraction: false }}
+        speed={800}
+        loop={true}
         className="h-full w-full"
       >
         {slides.map((slide, i) => (
           <SwiperSlide key={i}>
-            <div className="relative h-full w-full">
-              <img src={slide.img} className="h-full w-full object-cover grayscale" alt="Fitness" referrerPolicy="no-referrer" />
-              <div className="absolute inset-0 bg-black/30" />
+            <div className="relative h-full w-full overflow-hidden">
+              <img 
+                src={slide.img} 
+                className="h-full w-full object-cover transition-transform duration-700" 
+                alt="Fitness" 
+                referrerPolicy="no-referrer" 
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-black/20" />
+              <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
+                <motion.h2 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
+                  className="text-4xl md:text-6xl font-black text-white mb-4 tracking-tighter drop-shadow-2xl"
+                >
+                  {slide.title}
+                </motion.h2>
+                <motion.p 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.1, ease: "easeOut" }}
+                  className="text-lg md:text-xl text-brand-neon font-bold uppercase tracking-widest drop-shadow-lg"
+                >
+                  {slide.subtitle}
+                </motion.p>
+              </div>
             </div>
           </SwiperSlide>
         ))}
@@ -88,6 +132,7 @@ const Card = ({ children, className, ...props }: { children: React.ReactNode, cl
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { pathname } = useLocation();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -113,14 +158,46 @@ const Navbar = () => {
               }}
             />
           </div>
-          <span className="text-2xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">VIRAFIT</span>
+          <span className="text-2xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">VİRAFİT</span>
         </Link>
 
         <div className="hidden lg:flex items-center gap-8">
-          <Link to="/" className="text-xs font-bold uppercase tracking-widest hover:text-brand-neon transition-colors">Ana Sayfa</Link>
-          <Link to="/services" className="text-xs font-bold uppercase tracking-widest hover:text-brand-neon transition-colors">Hizmetlerimiz</Link>
-          <Link to="/about" className="text-xs font-bold uppercase tracking-widest hover:text-brand-neon transition-colors">Hakkımızda</Link>
-          <Link to="/contact" className="text-xs font-bold uppercase tracking-widest hover:text-brand-neon transition-colors">İletişim</Link>
+          <Link 
+            to="/" 
+            className={cn(
+              "text-xs font-bold uppercase tracking-widest transition-colors focus:outline-none select-none cursor-pointer",
+              pathname === "/" ? "text-brand-neon" : "text-white hover:text-brand-neon"
+            )}
+          >
+            ANASAYFA
+          </Link>
+          <Link 
+            to="/services" 
+            className={cn(
+              "text-xs font-bold uppercase tracking-widest transition-colors focus:outline-none select-none cursor-pointer",
+              pathname === "/services" ? "text-brand-neon" : "text-white hover:text-brand-neon"
+            )}
+          >
+            HİZMETLERİMİZ
+          </Link>
+          <Link 
+            to="/about" 
+            className={cn(
+              "text-xs font-bold uppercase tracking-widest transition-colors focus:outline-none select-none cursor-pointer",
+              pathname === "/about" ? "text-brand-neon" : "text-white hover:text-brand-neon"
+            )}
+          >
+            HAKKIMIZDA
+          </Link>
+          <Link 
+            to="/contact" 
+            className={cn(
+              "text-xs font-bold uppercase tracking-widest transition-colors focus:outline-none select-none cursor-pointer",
+              pathname === "/contact" ? "text-brand-neon" : "text-white hover:text-brand-neon"
+            )}
+          >
+            İLETİŞİM
+          </Link>
         </div>
 
         <button className="lg:hidden text-white" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
@@ -138,10 +215,10 @@ const Navbar = () => {
             className="lg:hidden absolute top-full left-0 right-0 bg-brand-dark border-b border-white/10 overflow-hidden shadow-2xl"
           >
             <div className="flex flex-col gap-6 p-8">
-              <Link to="/" className="text-sm font-bold uppercase tracking-widest" onClick={() => setIsMobileMenuOpen(false)}>Ana Sayfa</Link>
-              <Link to="/services" className="text-sm font-bold uppercase tracking-widest" onClick={() => setIsMobileMenuOpen(false)}>Hizmetlerimiz</Link>
-              <Link to="/about" className="text-sm font-bold uppercase tracking-widest" onClick={() => setIsMobileMenuOpen(false)}>Hakkımızda</Link>
-              <Link to="/contact" className="text-sm font-bold uppercase tracking-widest" onClick={() => setIsMobileMenuOpen(false)}>İletişim</Link>
+              <Link to="/" className="text-sm font-bold uppercase tracking-widest" onClick={() => setIsMobileMenuOpen(false)}>ANASAYFA</Link>
+              <Link to="/services" className="text-sm font-bold uppercase tracking-widest" onClick={() => setIsMobileMenuOpen(false)}>HİZMETLERİMİZ</Link>
+              <Link to="/about" className="text-sm font-bold uppercase tracking-widest" onClick={() => setIsMobileMenuOpen(false)}>HAKKIMIZDA</Link>
+              <Link to="/contact" className="text-sm font-bold uppercase tracking-widest" onClick={() => setIsMobileMenuOpen(false)}>İLETİŞİM</Link>
             </div>
           </motion.div>
         )}
@@ -156,7 +233,7 @@ const Hero = () => {
       <div className="absolute inset-0">
         <img 
           src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop" 
-          className="w-full h-full object-cover grayscale brightness-50" 
+          className="w-full h-full object-cover brightness-75" 
           alt="Fitness"
           referrerPolicy="no-referrer"
         />
@@ -176,7 +253,7 @@ const Hero = () => {
             </span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-2xl mx-auto font-medium leading-relaxed">
-            EMS, Biorezonans ve kişiye özel pilates ile kısa sürede gözle görülür değişim.
+            EMS, Biyorezonans ve kişiye özel pilates ile kısa sürede gözle görülür değişim.
           </p>
         </motion.div>
       </div>
@@ -212,7 +289,7 @@ const AboutUs = () => {
             
             <div className="space-y-6 text-gray-300 leading-relaxed">
               <p className="text-xl font-medium text-white">
-                VİRAFİT KURTKÖY YENIŞEHIR PENDİK İSTANBUL'da bulunan üyelerine, bireysel ihtiyaçlarını karşılamak amacıyla kısa sürede sonuç veren; son teknoloji cihazlar ile destek ve diyetisyen takipli beslenme programları sunmaktadır.
+                VİRAFİT KURTKÖY YENİŞEHİR PENDİK İSTANBUL'da bulunan üyelerine, bireysel ihtiyaçlarını karşılamak amacıyla kısa sürede sonuç veren; son teknoloji cihazlar ile destek ve diyetisyen takipli beslenme programları sunmaktadır.
               </p>
               <p>
                 Kişisel antrenörlerimiz ve beslenme uzmanlarımızdan oluşan ekibimiz, sağlık ve fitness hedeflerinize ulaşmanız için size özel bir program oluşturmak üzere sizinle birlikte çalışacak; tüm bunları isterseniz kendi evinizin, ofisinizin rahatlığında veya özel butik stüdyomuzda gerçekleştirebilirsiniz. Sizi motive edeceğiz ve en iyi halinize ulaşmanıza yardımcı olmak için yanınızda olacağız.
@@ -309,25 +386,25 @@ const Services = () => {
     {
       title: "EMS Antrenmanı",
       desc: "20 dakikada 4 saatlik antrenman etkisi.",
-      img: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=2070&auto=format&fit=crop",
+      img: "https://lh3.googleusercontent.com/d/1vRSIjLFmAWMrtmWZs7PMNnpkpfoHDARt=s1024",
       tag: "Popüler"
     },
     {
-      title: "Biorezonans",
+      title: "Biyorezonans",
       desc: "Vücut frekanslarını dengeleyerek iştah kontrolü.",
-      img: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=1920&auto=format&fit=crop",
+      img: "https://lh3.googleusercontent.com/d/1d2PCvv9nKZftS6jUWjEexMjknfqPjH9k=s1024",
       tag: "Teknolojik"
     },
     {
       title: "Klinik Pilates",
       desc: "Esneklik ve merkez bölge güçlendirme.",
-      img: "https://images.unsplash.com/photo-1518611012118-29a8d63ee0c2?q=80&w=2070&auto=format&fit=crop",
+      img: "https://lh3.googleusercontent.com/d/177BntrnlQTMMkpvpxIT6ScWxXIJhK8Jy=s1024",
       tag: "Denge"
     },
     {
       title: "Bölgesel İncelme",
       desc: "Hedef odaklı cihazlarla yağ yakımı.",
-      img: "https://images.unsplash.com/photo-1518310383802-640c2de311b2?q=80&w=2070&auto=format&fit=crop",
+      img: "https://images.unsplash.com/photo-1518310383802-640c2de311b2?q=80&w=2000&auto=format&fit=crop",
       tag: "Odaklı"
     }
   ];
@@ -356,7 +433,7 @@ const Services = () => {
             >
               <img 
                 src={service.img} 
-                className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000"
+                className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-all duration-1000"
                 alt={service.title}
                 referrerPolicy="no-referrer"
               />
@@ -381,20 +458,58 @@ const Services = () => {
 
 const ContactSection = () => {
   return (
-    <section id="contact" className="bg-brand-dark pt-20">
+    <section id="contact" className="bg-brand-dark pt-20 min-h-screen flex flex-col scroll-mt-20">
       <PilatesSlider />
       
-      {/* Map Section */}
-      <div className="h-[400px] w-full bg-gray-900 overflow-hidden">
-        <iframe 
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3014.23456789!2d29.3087!3d40.9123!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cad0f123456789%3A0x1234567890abcdef!2zS3VydGvDtnksIFBlbmRpay_EsHN0YW5idWw!5e0!3m2!1str!2str!4v1711620000000!5m2!1str!2str" 
-          width="100%" 
-          height="100%" 
-          style={{ border: 0, filter: 'grayscale(1) invert(1) contrast(1.2)' }} 
-          allowFullScreen 
-          loading="lazy" 
-          referrerPolicy="no-referrer-when-downgrade"
-        ></iframe>
+      {/* Aesthetic Gap & Title */}
+      <div className="relative py-24 px-6 overflow-hidden">
+        {/* Decorative Elements */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-b from-brand-neon to-transparent opacity-50" />
+        <div className="absolute -left-20 top-1/2 -translate-y-1/2 w-64 h-64 bg-brand-neon/5 blur-[120px] rounded-full" />
+        <div className="absolute -right-20 top-1/2 -translate-y-1/2 w-64 h-64 bg-brand-pink/5 blur-[120px] rounded-full" />
+
+        <div className="max-w-7xl mx-auto text-center relative z-10">
+          <motion.p 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="text-brand-neon font-black uppercase tracking-[0.4em] text-[10px] mb-6"
+          >
+            Bize Ulaşın
+          </motion.p>
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="text-5xl md:text-8xl font-black tracking-tighter uppercase leading-[0.85] text-white"
+          >
+            SİZİ BEKLİYORUZ <br /> 
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-neon to-brand-pink">
+              KURTKÖY STÜDYOMUZ
+            </span>
+          </motion.h2>
+        </div>
+      </div>
+
+      {/* Map Section with Professional Spacing */}
+      <div className="px-6 pb-32">
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-4xl mx-auto h-[350px] md:h-[450px] rounded-[3rem] overflow-hidden border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.3)] relative group"
+        >
+          <div className="absolute inset-0 bg-brand-neon/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10" />
+          <iframe 
+            src="https://maps.google.com/maps?q=Kurtköy%20Yenişehir%20Pendik%20İstanbul&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+            width="100%" 
+            height="100%" 
+            style={{ border: 0 }} 
+            allowFullScreen 
+            loading="lazy" 
+            referrerPolicy="no-referrer-when-downgrade"
+            className="relative z-0"
+          ></iframe>
+        </motion.div>
       </div>
 
       {/* Contact Form Section */}
@@ -406,26 +521,30 @@ const ContactSection = () => {
           </div>
           
           <Card className="p-10 border-white/10 bg-white/[0.03]">
-            <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+            <form 
+              className="space-y-6" 
+              action="https://formspree.io/f/emtslimkurtkoy@gmail.com" 
+              method="POST"
+            >
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-xs font-bold text-gray-500 uppercase tracking-widest">Tam Adınız</label>
-                  <input type="text" className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 outline-none focus:border-brand-neon transition-all" placeholder="Ad Soyad" />
+                  <input name="name" type="text" required className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 outline-none focus:border-brand-neon transition-all" placeholder="Ad Soyad" />
                 </div>
                 <div className="space-y-2">
                   <label className="text-xs font-bold text-gray-500 uppercase tracking-widest">Telefon Numarası</label>
-                  <input type="tel" className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 outline-none focus:border-brand-neon transition-all" placeholder="(5XX) XXX XX XX" />
+                  <input name="phone" type="tel" required className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 outline-none focus:border-brand-neon transition-all" placeholder="(5XX) XXX XX XX" />
                 </div>
               </div>
               <div className="space-y-2">
                 <label className="text-xs font-bold text-gray-500 uppercase tracking-widest">E-posta Adresi</label>
-                <input type="email" className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 outline-none focus:border-brand-neon transition-all" placeholder="ornek@mail.com" />
+                <input name="email" type="email" required className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 outline-none focus:border-brand-neon transition-all" placeholder="ornek@mail.com" />
               </div>
               <div className="space-y-2">
                 <label className="text-xs font-bold text-gray-500 uppercase tracking-widest">Mesajınız</label>
-                <textarea rows={5} className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 outline-none focus:border-brand-neon transition-all resize-none" placeholder="Mesajınızı buraya yazın..."></textarea>
+                <textarea name="message" rows={5} required className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 outline-none focus:border-brand-neon transition-all resize-none" placeholder="Mesajınızı buraya yazın..."></textarea>
               </div>
-              <Button className="w-full py-5 text-xl uppercase tracking-widest">Gönder</Button>
+              <Button type="submit" className="w-full py-5 text-xl uppercase tracking-widest">Gönder</Button>
             </form>
           </Card>
         </div>
@@ -442,7 +561,7 @@ const EnhancedFooter = () => {
         <div className="max-w-md space-y-6">
           <div className="flex items-center gap-2">
             <Activity className="text-brand-neon w-8 h-8" />
-            <span className="text-2xl font-black tracking-tighter">VIRAFIT</span>
+            <span className="text-2xl font-black tracking-tighter">VİRAFİT</span>
           </div>
           <p className="text-gray-400 leading-relaxed">
             Daha sağlıklı ve güçlü bir versiyonunuza giden yolculuk burada başlıyor.
@@ -458,7 +577,7 @@ const EnhancedFooter = () => {
             </div>
             <div className="flex items-center gap-3 text-gray-400">
               <Mail size={18} className="text-brand-neon" />
-              <span>info@virafit.com</span>
+              <span>emtslimkurtkoy@gmail.com</span>
             </div>
           </div>
           <div className="flex items-center gap-4 pt-4">

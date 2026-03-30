@@ -33,17 +33,17 @@ import 'swiper/css/pagination';
 const PilatesSlider = () => {
   const slides = [
     { 
-      img: "https://lh3.googleusercontent.com/d/177BntrnlQTMMkpvpxIT6ScWxXIJhK8Jy=s2048",
+      img: "https://lh3.googleusercontent.com/d/177BntrnlQTMMkpvpxIT6ScWxXIJhK8Jy=s1200",
       title: "KLİNİK PİLATES",
       subtitle: "Vücudunuzu esnetin, merkezinizi güçlendirin."
     },
     { 
-      img: "https://lh3.googleusercontent.com/d/1vRSIjLFmAWMrtmWZs7PMNnpkpfoHDARt=s2048",
+      img: "https://lh3.googleusercontent.com/d/1vRSIjLFmAWMrtmWZs7PMNnpkpfoHDARt=s1200",
       title: "EMS VE TEKNOLOJİ",
       subtitle: "Geleceğin antrenman sistemleri ile tanışın."
     },
     { 
-      img: "https://lh3.googleusercontent.com/d/1d2PCvv9nKZftS6jUWjEexMjknfqPjH9k=s2048",
+      img: "https://lh3.googleusercontent.com/d/1d2PCvv9nKZftS6jUWjEexMjknfqPjH9k=s1200",
       title: "BİOREZONANS",
       subtitle: "Vücut frekanslarını dengeleyerek iştah kontrolü."
     }
@@ -67,9 +67,13 @@ const PilatesSlider = () => {
               <img 
                 src={slide.img} 
                 className="h-full w-full object-cover transition-transform duration-700" 
-                alt="Fitness" 
+                alt={slide.title} 
                 referrerPolicy="no-referrer" 
                 loading="lazy"
+                decoding="async"
+                onError={(e) => {
+                  e.currentTarget.src = `https://picsum.photos/seed/${slide.title}/1920/1080`;
+                }}
               />
               <div className="absolute inset-0 bg-black/20" />
               <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
@@ -650,9 +654,9 @@ const AppointmentPage = () => {
 const Hero = () => {
   const [currentImage, setCurrentImage] = React.useState(0);
   const images = [
-    { url: "https://lh3.googleusercontent.com/d/1FieZlYjC32xrYOffY4PJwvLjf2oqtyxK=s2048", alt: "EMS Antrenman" },
-    { url: "https://lh3.googleusercontent.com/d/18IYD9CZ8D0QfWRh6W-Oc7uFvmZCQJ_BB=s2048", alt: "Biorezonans" },
-    { url: "https://lh3.googleusercontent.com/d/177BntrnlQTMMkpvpxIT6ScWxXIJhK8Jy=s2048", alt: "Klinik Pilates" }
+    { url: "https://lh3.googleusercontent.com/d/1FieZlYjC32xrYOffY4PJwvLjf2oqtyxK=s1200", alt: "EMS Antrenman" },
+    { url: "https://lh3.googleusercontent.com/d/18IYD9CZ8D0QfWRh6W-Oc7uFvmZCQJ_BB=s1200", alt: "Biorezonans" },
+    { url: "https://lh3.googleusercontent.com/d/177BntrnlQTMMkpvpxIT6ScWxXIJhK8Jy=s1200", alt: "Klinik Pilates" }
   ];
 
   React.useEffect(() => {
@@ -676,6 +680,11 @@ const Hero = () => {
             className="w-full h-full object-cover brightness-50" 
             alt={images[currentImage].alt}
             referrerPolicy="no-referrer"
+            decoding="async"
+            fetchpriority={currentImage === 0 ? "high" : "auto"}
+            onError={(e) => {
+              e.currentTarget.src = `https://picsum.photos/seed/${images[currentImage].alt}/1920/1080`;
+            }}
           />
         </AnimatePresence>
         <div className="absolute inset-0 bg-gradient-to-b from-brand-dark/80 via-transparent to-brand-dark" />
@@ -813,7 +822,7 @@ const Services = () => {
     {
       title: "Diyetisyen",
       desc: "Kişiye özel beslenme programları ve uzman takibi.",
-      img: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?q=80&w=2070&auto=format&fit=crop",
+      img: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?q=80&w=1200&auto=format&fit=crop",
       tag: "Beslenme"
     },
     {
@@ -825,7 +834,7 @@ const Services = () => {
     {
       title: "Zayıflama Cihazları",
       desc: "Son teknoloji cihazlarla bölgesel incelme ve sıkılaşma.",
-      img: "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?q=80&w=2070&auto=format&fit=crop",
+      img: "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?q=80&w=1200&auto=format&fit=crop",
       tag: "Odaklı"
     },
     {
@@ -857,6 +866,11 @@ const Services = () => {
                   className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-all duration-1000"
                   alt={service.title}
                   referrerPolicy="no-referrer"
+                  loading="lazy"
+                  decoding="async"
+                  onError={(e) => {
+                    e.currentTarget.src = `https://picsum.photos/seed/${service.title}/800/800`;
+                  }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/20 to-transparent" />
                 

@@ -16,6 +16,10 @@
   body {
     @apply bg-brand-dark text-white antialiased selection:bg-brand-neon selection:text-white;
   }
+  
+  option {
+    @apply bg-brand-surface text-white;
+  }
 }
 
 @layer utilities {
